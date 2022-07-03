@@ -20,22 +20,20 @@ class Questions:
         self.question_number = 0
         self.current_question = None
 
-    def still_questions_left(self):
+    def still_questions_left(self) -> bool:
         return self.question_number < len(self.data)
 
-    def next_question(self):
+    def next_question(self) -> str:
         if self.still_questions_left():
             res = self.data[self.question_number]
             self.question_number += 1
             self.current_question = res
             return html.unescape(res['question'])
 
-    def check_answer(self, user_answer):
-        if user_answer == self.current_question['correct_answer']\
+    def check_answer(self, user_answer) -> bool:
+        if user_answer == self.current_question['correct_answer'] \
                 and self.question_number <= 10:
             # note that the bool is represented in string format
             self.score += 1
             return True
         return False
-
-
